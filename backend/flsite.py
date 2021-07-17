@@ -15,6 +15,7 @@ from UserLogin import UserLogin
 
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+
 # =========================================================================================================================
 # КОНФИГ
 # =========================================================================================================================
@@ -43,6 +44,10 @@ app.config.from_object(__name__)
 app.config.update(dict(DATABASE=os.path.join(app.root_path,'flsite.db')))
 
 
+# import blueprint admin
+from admin.admin import admin
+# регистрация модуля
+app.register_blueprint(admin, url_prefix='/admin')
 
 menu = [{"name": "Главная", "url": "/"},
         {"name": "О сайте", "url": "about"},
